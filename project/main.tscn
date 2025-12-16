@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://mg2nryewrpyd"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_wnx7o"]
+
+[node name="main" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wnx7o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="UrlLineEdit" type="LineEdit" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "ws://localhost:49001"
+placeholder_text = "Url"
+
+[node name="ConnectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Connect"
+
+[node name="DisconnectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Disconnect"
+
+[node name="ConnectionStatusLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Connection status: -"
+
+[node name="PingButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ping"
+
+[node name="LogTextEdit" type="TextEdit" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Log"
+wrap_mode = 1
+draw_tabs = true
+
+[connection signal="text_submitted" from="VBoxContainer/UrlLineEdit" to="." method="connect_to_url"]
+[connection signal="pressed" from="VBoxContainer/ConnectButton" to="." method="connect_to_url" binds= [false]]
+[connection signal="pressed" from="VBoxContainer/DisconnectButton" to="." method="_on_disconnect_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PingButton" to="." method="_on_ping_button_pressed"]
